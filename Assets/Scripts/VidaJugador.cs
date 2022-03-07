@@ -27,5 +27,7 @@ public class VidaJugador : MonoBehaviour
         if (currentHealth <= 0) {
             gameObject.SetActive(false);
         }
+
+        UIController.instance.UpdateHealthDisplay();
     }
 }
