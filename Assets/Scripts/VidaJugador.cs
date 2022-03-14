@@ -6,6 +6,11 @@ public class VidaJugador : MonoBehaviour
 {
     public static VidaJugador instance;
     public int currentHealth, maxHealth;
+    public float invincibleLength;
+    private float invincibleCounter;
+
+    private SpriteRenderer sprite;
+
     private void Awake() {
         instance = this;
     }
@@ -13,21 +18,50 @@ public class VidaJugador : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (invincibleCounter > 0)
+        {
+            invincibleCounter -= Time.deltaTime;
+
+            if (invincibleCounter<=0) 
+            {
+                sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1f);
+            }
+        }
     }
 
-    public void DealDamage() {
-        currentHealth--;
+    public void DealDamage() 
+    {
+        if (invincibleCounter <= 0) 
+        {
 
-        if (currentHealth <= 0) {
-            gameObject.SetActive(false);
+            currentHealth--;
+            ControladorJugador.instance.anim.SetTrigger("Hurt");
+
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0;
+                gameObject.SetActive(false);
+            }
+            else 
+            {
+                invincibleCounter = invincibleLength;
+                sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, .5f);
+
+                ControladorJugador.instance.Knockback();
+            }
+
+            UIController.instance.UpdateHealthDisplay();
+
+
+
         }
-
-        UIController.instance.UpdateHealthDisplay();
+       
     }
 }
