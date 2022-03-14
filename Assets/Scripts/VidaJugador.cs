@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 
 public class VidaJugador : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class VidaJugador : MonoBehaviour
     private float invincibleCounter;
 
     private SpriteRenderer sprite;
+    
 
     private void Awake() {
         instance = this;
@@ -46,6 +48,7 @@ public class VidaJugador : MonoBehaviour
 
             if (currentHealth <= 0)
             {
+               // ControladorJugador.instance.anim.SetTrigger("Death");  no funciona porque el respawn no espera a que haga la animación ARREGLARLO
                 currentHealth = 0;
                 LevelManager.instance.RespawnPlayer();
             }
