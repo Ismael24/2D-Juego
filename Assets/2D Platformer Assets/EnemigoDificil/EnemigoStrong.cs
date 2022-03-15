@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemigoStrong : MonoBehaviour
 {
+    public static EnemigoStrong instance;
     public int rutina;
     public float cronometro;
     public Animator ani;
@@ -17,6 +18,10 @@ public class EnemigoStrong : MonoBehaviour
     public float rango_ataque;
     public GameObject rango;
     public GameObject hit;
+    private void Awake()
+    {
+        instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
