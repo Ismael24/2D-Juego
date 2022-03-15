@@ -27,9 +27,9 @@ public class LevelManager : MonoBehaviour
     }
 
     IEnumerator RespawnCo() {
-        ControladorJugador.instance.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(waitToRespawn);
+        ControladorJugador.instance.gameObject.SetActive(false);
 
         ControladorJugador.instance.gameObject.SetActive(true);
         ControladorJugador.instance.transform.position = CheckpointController.instance.spawn;

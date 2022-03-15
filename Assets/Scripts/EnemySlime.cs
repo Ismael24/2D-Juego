@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemySlime : MonoBehaviour
 {
+    public static EnemySlime instance;
     public float moveSpeed;
     public Transform rightPoint, leftPoint;
 
@@ -15,8 +16,11 @@ public class EnemySlime : MonoBehaviour
     public float moveTime, waitTime;
     private float moveCount, waitCount;
 
-    private Animator anim;
-
+    public Animator anim;
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();

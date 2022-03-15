@@ -44,11 +44,12 @@ public class VidaJugador : MonoBehaviour
         {
 
             currentHealth--;
+            Audio.instance.PlaySSFX(1);
             ControladorJugador.instance.anim.SetTrigger("Hurt");
 
             if (currentHealth <= 0)
             {
-               // ControladorJugador.instance.anim.SetTrigger("Death");  no funciona porque el respawn no espera a que haga la animación ARREGLARLO
+               ControladorJugador.instance.anim.SetTrigger("Death");
                 currentHealth = 0;
                 LevelManager.instance.RespawnPlayer();
             }

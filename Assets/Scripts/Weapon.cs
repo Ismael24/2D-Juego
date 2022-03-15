@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour
         if (other.tag == "Enemy") 
         {
             other.transform.parent.gameObject.SetActive(false);
+
         
         }
     }

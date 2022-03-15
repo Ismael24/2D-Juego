@@ -7,6 +7,10 @@ public class ControladorJugador : MonoBehaviour
     public static ControladorJugador instance;
     public float velocidadMovimiento;
     public Rigidbody2D rigid;
+
+    public bool Dash;
+    public float Dash_T;
+    public float Speed_Dash;
    
     public float jumpForce;
     public Transform groundCheckpoint;
@@ -16,7 +20,6 @@ public class ControladorJugador : MonoBehaviour
     private bool girado;
     public Animator anim;
     private SpriteRenderer sprite;
-    public Transform ataqueIzquierda, ataqueDerecha;
 
     public float knockBackLength, knockBackForce;
     public float knockBackCounter;
@@ -45,11 +48,13 @@ public class ControladorJugador : MonoBehaviour
             isGrounded = Physics2D.OverlapCircle(groundCheckpoint.position, .2f, whatIsGround);
 
 
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetKey(KeyCode.E))
             {
                 anim.SetBool("Attack", true);
-
-
+                //solo si está parado
+                //Audio.instance.PlaySSFX(0);
+                //si no lo está :
+                Audio.instance.PlaySSFX(2);
 
             }
             else
@@ -68,12 +73,14 @@ public class ControladorJugador : MonoBehaviour
             {
                 if (isGrounded)
                 {
+                    Audio.instance.PlaySSFX(3);
                     rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
                 }
                 else
                 {
                     if (doubleJump)
                     {
+                        Audio.instance.PlaySSFX(3);
                         rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
                         doubleJump = false;
                     }
@@ -82,6 +89,52 @@ public class ControladorJugador : MonoBehaviour
 
 
 
+
+            }
+
+            if (Input.GetKey(KeyCode.S))
+            {
+                if (!girado)
+                {
+                    Dash_T += 1 * Time.deltaTime;
+                    if (Dash_T < 0.35f)
+                    {
+                        Dash = true;
+                        anim.SetBool("dash", true);
+                        transform.Translate(Vector3.right * Speed_Dash * Time.fixedDeltaTime);
+
+                    }
+                    else
+                    {
+                        Dash = false;
+                        anim.SetBool("dash", false);
+                    }
+
+                }
+                else {
+                    Dash_T += 1 * Time.deltaTime;
+                    if (Dash_T < 0.35f)
+                    {
+                        Dash = true;
+                        anim.SetBool("dash", true);
+                        transform.Translate(Vector3.left * Speed_Dash * Time.fixedDeltaTime);
+
+                    }
+                    else
+                    {
+                        Dash = false;
+                        anim.SetBool("dash", false);
+                    }
+
+
+                }
+
+            }
+            else 
+            {
+                Dash = false;
+                anim.SetBool("dash", false);
+                Dash_T = 0;
 
             }
 
