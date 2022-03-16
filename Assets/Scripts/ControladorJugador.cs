@@ -23,6 +23,7 @@ public class ControladorJugador : MonoBehaviour
 
     public float knockBackLength, knockBackForce;
     public float knockBackCounter;
+    public VidaJugador vida;
 
     private void Awake() 
     {
@@ -40,142 +41,153 @@ public class ControladorJugador : MonoBehaviour
     void Update()
     {
         
-        if (knockBackCounter <= 0)
-        {
-            
-            rigid.velocity = new Vector2(velocidadMovimiento * Input.GetAxis("Horizontal"), rigid.velocity.y);
-
-            isGrounded = Physics2D.OverlapCircle(groundCheckpoint.position, .2f, whatIsGround);
-
-
-            if (Input.GetKey(KeyCode.E))
+        
+            if (knockBackCounter <= 0)
             {
-                anim.SetBool("Attack", true);
-                //solo si está parado
-                //Audio.instance.PlaySSFX(0);
-                //si no lo está :
-                Audio.instance.PlaySSFX(2);
+
+                rigid.velocity = new Vector2(velocidadMovimiento * Input.GetAxis("Horizontal"), rigid.velocity.y);
+
+                isGrounded = Physics2D.OverlapCircle(groundCheckpoint.position, .2f, whatIsGround);
+
+
+                if (Input.GetKey(KeyCode.E))
+                {
+                    anim.SetBool("Attack", true);
+                    //solo si está parado
+                    //Audio.instance.PlaySSFX(0);
+                    //si no lo está :
+                    Audio.instance.PlaySSFX(2);
+
+                }
+                else
+                {
+                    anim.SetBool("Attack", false);
+                }
+
+
+
+                if (isGrounded)
+                {
+                    doubleJump = true;
+                }
+
+                if (Input.GetButtonDown("Jump"))
+                {
+                    if (isGrounded)
+                    {
+                        Audio.instance.PlaySSFX(3);
+                        rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
+                    }
+                    else
+                    {
+                        if (doubleJump)
+                        {
+                            Audio.instance.PlaySSFX(3);
+                            rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
+                            doubleJump = false;
+                        }
+
+                    }
+
+
+
+
+                }
+
+                if (Input.GetKey(KeyCode.S))
+                {
+                    if (!girado)
+                    {
+                        Dash_T += 1 * Time.deltaTime;
+                        if (Dash_T < 0.35f)
+                        {
+                            Dash = true;
+                            anim.SetBool("dash", true);
+                            transform.Translate(Vector3.right * Speed_Dash * Time.fixedDeltaTime);
+
+                        }
+                        else
+                        {
+                            Dash = false;
+                            anim.SetBool("dash", false);
+                        }
+
+                    }
+                    else
+                    {
+                        Dash_T += 1 * Time.deltaTime;
+                        if (Dash_T < 0.35f)
+                        {
+                            Dash = true;
+                            anim.SetBool("dash", true);
+                            transform.Translate(Vector3.left * Speed_Dash * Time.fixedDeltaTime);
+
+                        }
+                        else
+                        {
+                            Dash = false;
+                            anim.SetBool("dash", false);
+                        }
+
+
+                    }
+
+                }
+                else
+                {
+                    Dash = false;
+                    anim.SetBool("dash", false);
+                    Dash_T = 0;
+
+                }
+
+
+
+                if (rigid.velocity.x < 0)
+                {
+                    transform.localScale = new Vector3(-1, 1, 1);
+
+                    girado = true;
+                }
+                else if (rigid.velocity.x > 0)
+                {
+                    transform.localScale = new Vector3(1, 1, 1);
+
+                    girado = false;
+
+                }
+
+
+
 
             }
             else
             {
-                anim.SetBool("Attack", false);
-            }
 
-
-
-            if (isGrounded)
-            {
-                doubleJump = true;
-            }
-
-            if (Input.GetButtonDown("Jump"))
-            {
-                if (isGrounded)
+                knockBackCounter -= Time.deltaTime;
+                if (!girado)
                 {
-                    Audio.instance.PlaySSFX(3);
-                    rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
+                    rigid.velocity = new Vector2(-knockBackForce, rigid.velocity.y);
                 }
                 else
                 {
-                    if (doubleJump)
-                    {
-                        Audio.instance.PlaySSFX(3);
-                        rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
-                        doubleJump = false;
-                    }
-
+                    rigid.velocity = new Vector2(knockBackForce, rigid.velocity.y);
                 }
-
-
-
-
-            }
-
-            if (Input.GetKey(KeyCode.S))
-            {
-                if (!girado)
-                {
-                    Dash_T += 1 * Time.deltaTime;
-                    if (Dash_T < 0.35f)
-                    {
-                        Dash = true;
-                        anim.SetBool("dash", true);
-                        transform.Translate(Vector3.right * Speed_Dash * Time.fixedDeltaTime);
-
-                    }
-                    else
-                    {
-                        Dash = false;
-                        anim.SetBool("dash", false);
-                    }
-
-                }
-                else {
-                    Dash_T += 1 * Time.deltaTime;
-                    if (Dash_T < 0.35f)
-                    {
-                        Dash = true;
-                        anim.SetBool("dash", true);
-                        transform.Translate(Vector3.left * Speed_Dash * Time.fixedDeltaTime);
-
-                    }
-                    else
-                    {
-                        Dash = false;
-                        anim.SetBool("dash", false);
-                    }
-
-
-                }
-
-            }
-            else 
-            {
-                Dash = false;
-                anim.SetBool("dash", false);
-                Dash_T = 0;
-
             }
 
 
-
-            if (rigid.velocity.x < 0)
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-
-                girado = true;
-            }
-            else if (rigid.velocity.x > 0)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-               
-                girado = false;
-
-            }
+            anim.SetFloat("moveSpeed", Mathf.Abs(rigid.velocity.x));
+            anim.SetBool("isGrounded", isGrounded);
 
 
 
 
-        }
-        else 
-        {
-           
-            knockBackCounter -= Time.deltaTime;
-            if (!girado)
-            {
-                rigid.velocity = new Vector2(-knockBackForce, rigid.velocity.y);
-            }
-            else 
-            {
-                rigid.velocity = new Vector2(knockBackForce, rigid.velocity.y);
-            }
-        }
+
+
+
+
         
 
-        anim.SetFloat("moveSpeed", Mathf.Abs(rigid.velocity.x));
-        anim.SetBool("isGrounded", isGrounded);
-        
 
 
     }

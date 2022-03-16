@@ -40,32 +40,42 @@ public class VidaJugador : MonoBehaviour
 
     public void DealDamage() 
     {
-        if (invincibleCounter <= 0) 
+        if (currentHealth != 0)
         {
-
-            currentHealth--;
-            Audio.instance.PlaySSFX(1);
-            ControladorJugador.instance.anim.SetTrigger("Hurt");
-
-            if (currentHealth <= 0)
+            if (invincibleCounter <= 0)
             {
-               ControladorJugador.instance.anim.SetTrigger("Death");
-                currentHealth = 0;
-                LevelManager.instance.RespawnPlayer();
+
+                currentHealth--;
+                Audio.instance.PlaySSFX(1);
+                ControladorJugador.instance.anim.SetTrigger("Hurt");
+
+                if (currentHealth <= 0)
+                {
+                    ControladorJugador.instance.anim.SetTrigger("Death");
+                    LevelManager.instance.RespawnPlayer();
+
+                }
+                else
+                {
+                    invincibleCounter = invincibleLength;
+                    sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, .5f);
+
+                    ControladorJugador.instance.Knockback();
+                }
+
+                UIController.instance.UpdateHealthDisplay();
+
+
+
             }
-            else 
-            {
-                invincibleCounter = invincibleLength;
-                sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, .5f);
-
-                ControladorJugador.instance.Knockback();
-            }
-
-            UIController.instance.UpdateHealthDisplay();
-
 
 
         }
-       
+        
+        
+
+
+
     }
+
 }
