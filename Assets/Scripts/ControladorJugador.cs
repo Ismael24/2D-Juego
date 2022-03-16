@@ -23,7 +23,6 @@ public class ControladorJugador : MonoBehaviour
 
     public float knockBackLength, knockBackForce;
     public float knockBackCounter;
-    public VidaJugador vida;
 
     private void Awake() 
     {
@@ -40,8 +39,8 @@ public class ControladorJugador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        
+        if (!ResumeMenu.instance.isPaused)
+        {
             if (knockBackCounter <= 0)
             {
 
@@ -186,7 +185,7 @@ public class ControladorJugador : MonoBehaviour
 
 
 
-        
+        }
 
 
 
