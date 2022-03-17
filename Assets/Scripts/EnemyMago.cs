@@ -32,7 +32,7 @@ public class EnemyMago : MonoBehaviour
 
         float distance = Mathf.Abs(target.transform.position.x - transform.position.x);
 
-        if (distance < 20.0f && Time.time > LastShoot + 2.5)
+        if (distance < 100.0f && Time.time > LastShoot + 2.5)
         {
             Shoot();
             LastShoot = Time.time;
