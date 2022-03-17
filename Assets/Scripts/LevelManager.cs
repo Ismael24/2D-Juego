@@ -26,6 +26,17 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(RespawnCo());
     }
 
+    public void RespawnPlayerInstant()
+    {
+        ControladorJugador.instance.gameObject.SetActive(false);
+
+        ControladorJugador.instance.gameObject.SetActive(true);
+        ControladorJugador.instance.transform.position = CheckpointController.instance.spawn;
+
+        VidaJugador.instance.currentHealth = VidaJugador.instance.maxHealth;
+        UIController.instance.UpdateHealthDisplay();
+    }
+
     IEnumerator RespawnCo() {
 
         yield return new WaitForSeconds(waitToRespawn);

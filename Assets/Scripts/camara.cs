@@ -19,7 +19,7 @@ public class camara : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(target.position.x, Mathf.Clamp(target.position.y, minHeight, maxHeight), transform.position.z);
+        transform.position = new Vector3(target.position.x, Mathf.Clamp(target.position.y+1, minHeight, maxHeight), transform.position.z);
 
         float amountToMoveX = transform.position.x - lastXPosition;
 
