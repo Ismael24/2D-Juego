@@ -17,12 +17,15 @@ public class ControladorJugador : MonoBehaviour
     public LayerMask whatIsGround;
     private bool isGrounded;
     private bool doubleJump;
+    private bool posDoble = false;
     private bool girado;
     public Animator anim;
     private SpriteRenderer sprite;
 
     public float knockBackLength, knockBackForce;
     public float knockBackCounter;
+
+    public GameObject BulletPrefab;
 
     private void Awake() 
     {
@@ -67,7 +70,12 @@ public class ControladorJugador : MonoBehaviour
 
                 if (isGrounded)
                 {
-                    doubleJump = true;
+                    if (posDoble == true)
+                    {
+                        doubleJump = true;
+
+                    }
+                    
                 }
 
                 if (Input.GetButtonDown("Jump"))
@@ -79,12 +87,17 @@ public class ControladorJugador : MonoBehaviour
                     }
                     else
                     {
-                        if (doubleJump)
+                        if (posDoble==true)
                         {
-                            Audio.instance.PlaySSFX(3);
-                            rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
-                            doubleJump = false;
+                            if (doubleJump)
+                            {
+                                Audio.instance.PlaySSFX(3);
+                                rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
+                                doubleJump = false;
+                            }
+
                         }
+                        
 
                     }
 
@@ -93,7 +106,10 @@ public class ControladorJugador : MonoBehaviour
 
                 }
 
-                if (Input.GetKey(KeyCode.S))
+               
+
+
+                    if (Input.GetKey(KeyCode.S))
                 {
                     if (!girado)
                     {
@@ -191,6 +207,10 @@ public class ControladorJugador : MonoBehaviour
 
     }
 
+    public void ActivarDobleSalto()
+    {
+        posDoble = true;
+    }
 
     public void Knockback()
     {

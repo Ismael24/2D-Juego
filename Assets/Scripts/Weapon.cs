@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public int contadorBoss = 6;
+    private int contadorBoss = 6;
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D other) 
     {
