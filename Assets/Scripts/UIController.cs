@@ -6,8 +6,11 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     public static UIController instance;
-    public Image heart1, heart2, heart3;
+    public Image heart1, heart2, heart3, barraMana;
+
     public Sprite heartFull, heartEmpty, heartHalf;
+    public Sprite manaFull, manaEmpty, manaHalf;
+
 
     private void Awake()
     {
@@ -80,6 +83,34 @@ public class UIController : MonoBehaviour
                 heart1.sprite = heartEmpty;
                 heart2.sprite = heartEmpty;
                 heart3.sprite = heartEmpty;
+
+                break;
+
+        }
+    }
+
+    public void UpdateManaDisplay()
+    {
+        switch (VidaJugador.instance.currentMana)
+        {
+            case 2:
+                barraMana.sprite = manaFull;
+
+                break;
+
+            case 1:
+                barraMana.sprite = manaHalf;
+
+                break;
+            case 0:
+                barraMana.sprite = manaEmpty;
+
+                break;
+
+
+
+            default:
+                barraMana.sprite = manaEmpty;
 
                 break;
 

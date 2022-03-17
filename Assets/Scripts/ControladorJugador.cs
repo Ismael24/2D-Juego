@@ -25,7 +25,7 @@ public class ControladorJugador : MonoBehaviour
     public float knockBackLength, knockBackForce;
     public float knockBackCounter;
 
-    public GameObject BulletPrefab;
+   
 
     private void Awake() 
     {
@@ -106,7 +106,11 @@ public class ControladorJugador : MonoBehaviour
 
                 }
 
-               
+                if (Input.GetKeyDown(KeyCode.W)) 
+                {
+                    
+                    VidaJugador.instance.DarVida();
+                }
 
 
                     if (Input.GetKey(KeyCode.S))

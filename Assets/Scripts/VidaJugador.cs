@@ -7,6 +7,7 @@ public class VidaJugador : MonoBehaviour
 {
     public static VidaJugador instance;
     public int currentHealth, maxHealth;
+    public int currentMana, maxMana;
     public float invincibleLength;
     private float invincibleCounter;
 
@@ -20,6 +21,7 @@ public class VidaJugador : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        currentMana = maxMana;
 
         sprite = GetComponent<SpriteRenderer>();
     }
@@ -74,6 +76,55 @@ public class VidaJugador : MonoBehaviour
         
         
 
+
+
+    }
+    public void DarMana() { 
+        currentMana++;
+        if (currentMana > maxMana) 
+        {
+            currentMana = maxMana;
+        }
+        UIController.instance.UpdateManaDisplay();
+    }
+    public void DarVida()
+    {
+        if (currentHealth<=4 && currentMana>0)
+        {
+            currentHealth = currentHealth + 2;
+            DealMana();
+            if (currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            UIController.instance.UpdateHealthDisplay();
+            UIController.instance.UpdateManaDisplay();
+        }
+    }
+
+    public void DealMana()
+    {
+        
+            if (currentMana != 0)
+            {
+                currentMana = currentMana - 1;
+                UIController.instance.UpdateManaDisplay();
+                UIController.instance.UpdateHealthDisplay();
+
+
+
+
+
+
+
+
+
+            }
+
+            UIController.instance.UpdateManaDisplay();
+            UIController.instance.UpdateHealthDisplay();
+
+        
 
 
     }

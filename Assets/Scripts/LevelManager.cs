@@ -6,6 +6,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
     public float waitToRespawn;
+    public int potionsCollected;
     // Start is called before the first frame update
 
     private void Awake() {
