@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Boss
   - terrein
+  - Mago
   layers:
   - Default
   - TransparentFX

@@ -7,7 +7,7 @@ public class ControladorJugador : MonoBehaviour
     public static ControladorJugador instance;
     public float velocidadMovimiento;
     public Rigidbody2D rigid;
-
+    
     public bool Dash;
     public float Dash_T;
     public float Speed_Dash;
@@ -21,6 +21,7 @@ public class ControladorJugador : MonoBehaviour
     private bool girado;
     public Animator anim;
     private SpriteRenderer sprite;
+    
 
     public float knockBackLength, knockBackForce;
     public float knockBackCounter;
@@ -112,8 +113,11 @@ public class ControladorJugador : MonoBehaviour
                     VidaJugador.instance.DarVida();
                 }
 
+               
 
-                    if (Input.GetKey(KeyCode.S))
+
+
+                if (Input.GetKey(KeyCode.S))
                 {
                     if (!girado)
                     {
@@ -164,13 +168,21 @@ public class ControladorJugador : MonoBehaviour
 
                 if (rigid.velocity.x < 0)
                 {
-                    transform.localScale = new Vector3(-1, 1, 1);
+                    transform.localScale = new Vector3(-1, 1, 1); 
+                    
+                  
+
+
+
 
                     girado = true;
                 }
                 else if (rigid.velocity.x > 0)
                 {
                     transform.localScale = new Vector3(1, 1, 1);
+                    
+                    
+
 
                     girado = false;
 
@@ -215,6 +227,7 @@ public class ControladorJugador : MonoBehaviour
     {
         posDoble = true;
     }
+
 
     public void Knockback()
     {
