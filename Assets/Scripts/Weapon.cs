@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
     {
         if (other.tag == "Enemy") 
         {
-            
+            Audio.instance.PlaySSFX(4);
             other.transform.parent.gameObject.SetActive(false);
             Instantiate(deathEffectSlime, other.transform.position, other.transform.rotation);
             Instantiate(potion, other.transform.position, other.transform.rotation);//No funciona, no hace el drop de la pocion
@@ -26,6 +26,7 @@ public class Weapon : MonoBehaviour
         if (other.tag == "Boss")
         {
             contadorBoss--;
+            Audio.instance.PlaySSFX(5);
             if (contadorBoss == 0)
             {
                 other.transform.parent.gameObject.SetActive(false);
@@ -41,6 +42,7 @@ public class Weapon : MonoBehaviour
         }
         if (other.tag == "Mago")
         {
+            Audio.instance.PlaySSFX(5);
 
             other.transform.parent.gameObject.SetActive(false);
             Instantiate(deathEffectMago, other.transform.position, other.transform.rotation);

@@ -97,6 +97,7 @@ public class VidaJugador : MonoBehaviour
             {
                 currentHealth = maxHealth;
             }
+            Audio.instance.PlaySSFX(11);
             UIController.instance.UpdateHealthDisplay();
             UIController.instance.UpdateManaDisplay();
         }

@@ -35,6 +35,7 @@ public class EnemyMago : MonoBehaviour
         if (distance < 100.0f && Time.time > LastShoot + 2.5)
         {
             Shoot();
+            Audio.instance.PlaySSFX(12);
             LastShoot = Time.time;
         }
     }

@@ -25,10 +25,12 @@ public class LevelManager : MonoBehaviour
 
     public void RespawnPlayer() {
         StartCoroutine(RespawnCo());
+        
     }
 
     public void RespawnPlayerInstant()
     {
+        Audio.instance.PlaySSFX(7);
         ControladorJugador.instance.gameObject.SetActive(false);
 
         ControladorJugador.instance.gameObject.SetActive(true);

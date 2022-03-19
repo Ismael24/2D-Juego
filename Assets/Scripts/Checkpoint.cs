@@ -13,8 +13,12 @@ public class Checkpoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            
             CheckpointController.instance.DeactivateCheckpoints();
             sprite.sprite = cpOn;
+            
+            
+            
             CheckpointController.instance.SetSpawn(transform.position);
 
         }

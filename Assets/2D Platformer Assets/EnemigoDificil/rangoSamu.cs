@@ -13,7 +13,9 @@ public class rangoSamu : MonoBehaviour
         {
             ani.SetBool("walk", false);
             ani.SetBool("run", false);
+
             ani.SetBool("attack", true);
+            Audio.instance.PlaySSFX(10);
             enemigo.atacando = true;
             GetComponent<BoxCollider2D>().enabled = false;
         

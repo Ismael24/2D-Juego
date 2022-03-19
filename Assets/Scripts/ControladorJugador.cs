@@ -56,9 +56,7 @@ public class ControladorJugador : MonoBehaviour
                 if (Input.GetKey(KeyCode.E))
                 {
                     anim.SetBool("Attack", true);
-                    //solo si está parado
-                    //Audio.instance.PlaySSFX(0);
-                    //si no lo está :
+                   
                     Audio.instance.PlaySSFX(2);
 
                 }

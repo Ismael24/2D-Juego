@@ -5,6 +5,7 @@ using UnityEngine;
 public class cofreSalto : MonoBehaviour
 {
     public Animator ani;
+    private bool abrir = true;
 
     void Start()
     {
@@ -15,7 +16,13 @@ public class cofreSalto : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            if (abrir)
+            {
+                Audio.instance.PlaySSFX(6);
+                abrir = false;
+            }
             
+
             ControladorJugador.instance.ActivarDobleSalto();
             ani.SetBool("abrir", true);
 

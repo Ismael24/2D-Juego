@@ -18,6 +18,7 @@ public class CheckpointController : MonoBehaviour
 
     private void Start()
     {
+
         checkpoints = FindObjectsOfType<Checkpoint>();
         spawn = ControladorJugador.instance.transform.position;
     }
@@ -26,9 +27,11 @@ public class CheckpointController : MonoBehaviour
     {
         for (int i = 0; i < checkpoints.Length; i++)
         {
+            
             checkpoints[i].ResetCheckpoint();
 
         }
+        
 
     }
 
@@ -36,5 +39,6 @@ public class CheckpointController : MonoBehaviour
     
     {
         spawn = newSpawn;
+        
     }
 }
