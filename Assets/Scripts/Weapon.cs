@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public static Weapon instance;
     private int contadorBoss = 1;
     public GameObject deathEffectSlime;
     public GameObject potion;
     public GameObject deathEffectSamu; 
     public GameObject deathEffectMago;
+    public bool samuFin = false;
+    public bool magoFin = false;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D other) 
@@ -31,6 +39,7 @@ public class Weapon : MonoBehaviour
             {
                 other.transform.parent.gameObject.SetActive(false);
                 Instantiate(deathEffectSamu, other.transform.position, other.transform.rotation);
+                LevelExit.instance.SamuDerrotado();
             }
             
                 
@@ -47,6 +56,7 @@ public class Weapon : MonoBehaviour
             other.transform.parent.gameObject.SetActive(false);
             Instantiate(deathEffectMago, other.transform.position, other.transform.rotation);
             Instantiate(potion, other.transform.position, other.transform.rotation);//No funciona, no hace el drop de la pocion
+            LevelExit.instance.MagoDerrotado();
 
 
 

@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
     public float waitToRespawn;
     public int potionsCollected;
+    public string final;
     // Start is called before the first frame update
 
     private void Awake() {
@@ -53,4 +55,22 @@ public class LevelManager : MonoBehaviour
 
 
     }
+    public void EndLevel() 
+    {
+        StartCoroutine(EndLevelCo());
+    }
+    public IEnumerator EndLevelCo() 
+    {
+        ControladorJugador.instance.stopInput = true;
+        yield return new WaitForSeconds(1);
+        UIController.instance.levelCompleteText.SetActive(true);
+
+        yield return new WaitForSeconds(1);
+
+        SceneManager.LoadScene(final);
+
+
+    }
+
+
 }

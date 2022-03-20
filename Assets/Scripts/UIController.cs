@@ -11,6 +11,8 @@ public class UIController : MonoBehaviour
     public Sprite heartFull, heartEmpty, heartHalf;
     public Sprite manaFull, manaEmpty, manaHalf;
 
+    public GameObject levelCompleteText;
+
 
     private void Awake()
     {

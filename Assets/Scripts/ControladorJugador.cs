@@ -7,7 +7,7 @@ public class ControladorJugador : MonoBehaviour
     public static ControladorJugador instance;
     public float velocidadMovimiento;
     public Rigidbody2D rigid;
-    
+    public bool stopInput;
     public bool Dash;
     public float Dash_T;
     public float Speed_Dash;
@@ -43,7 +43,7 @@ public class ControladorJugador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!ResumeMenu.instance.isPaused)
+        if (!ResumeMenu.instance.isPaused && !stopInput)
         {
             if (knockBackCounter <= 0)
             {
