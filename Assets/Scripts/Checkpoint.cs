@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Checkpoint : MonoBehaviour
 {
     public SpriteRenderer sprite;
@@ -21,6 +22,8 @@ public class Checkpoint : MonoBehaviour
             
             CheckpointController.instance.SetSpawn(transform.position);
 
+
+
         }
     }
 
@@ -28,4 +31,6 @@ public class Checkpoint : MonoBehaviour
         sprite.sprite = cpOff;
 
     }
+
+
 }

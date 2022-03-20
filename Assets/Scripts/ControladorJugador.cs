@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Data;
+using Mono.Data.Sqlite;
 
 public class ControladorJugador : MonoBehaviour
 {
@@ -17,7 +20,7 @@ public class ControladorJugador : MonoBehaviour
     public LayerMask whatIsGround;
     private bool isGrounded;
     private bool doubleJump;
-    private bool posDoble = false;
+    private int posDoble = 0;
     private bool girado;
     public Animator anim;
     private SpriteRenderer sprite;
@@ -37,7 +40,31 @@ public class ControladorJugador : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-       
+
+        string url1 = "URI=file:" + Application.dataPath + "/database/2d.db";
+        IDbConnection dbConn1 = new SqliteConnection(url1);
+        dbConn1.Open();
+        IDbCommand comando1 = dbConn1.CreateCommand();
+
+        comando1.CommandText = "select * from saltoDoble";
+        IDataReader reader1 = comando1.ExecuteReader();
+
+
+        while (reader1.Read())
+        {
+            posDoble = (byte)reader1.GetInt32(reader1.GetOrdinal("activo"));
+        }
+
+
+        reader1.Dispose();
+        reader1 = null;
+        comando1.Dispose();
+        comando1 = null;
+
+        dbConn1.Dispose();
+        dbConn1 = null;
+
+
     }
 
     // Update is called once per frame
@@ -69,7 +96,7 @@ public class ControladorJugador : MonoBehaviour
 
                 if (isGrounded)
                 {
-                    if (posDoble == true)
+                    if (posDoble == 1)
                     {
                         doubleJump = true;
 
@@ -86,7 +113,7 @@ public class ControladorJugador : MonoBehaviour
                     }
                     else
                     {
-                        if (posDoble==true)
+                        if (posDoble==1)
                         {
                             if (doubleJump)
                             {
@@ -223,7 +250,25 @@ public class ControladorJugador : MonoBehaviour
 
     public void ActivarDobleSalto()
     {
-        posDoble = true;
+        posDoble = 1;
+
+        string url = "URI=file:" + Application.dataPath + "/database/2d.db";
+        IDbConnection dbConn = new SqliteConnection(url);
+        dbConn.Open();
+        IDbCommand comando = dbConn.CreateCommand();
+
+        comando.CommandText = "delete from saltoDoble";
+        comando.ExecuteNonQuery();
+
+        comando.CommandText = "insert into saltoDoble values(" + posDoble + ")";
+        comando.ExecuteNonQuery();
+
+        comando.Dispose();
+        comando = null;
+
+        dbConn.Dispose();
+        dbConn = null;
+
     }
 
 
@@ -232,4 +277,6 @@ public class ControladorJugador : MonoBehaviour
         knockBackCounter = knockBackLength;
         rigid.velocity = new Vector2(0f, knockBackForce);
     }
+
+    
 }
