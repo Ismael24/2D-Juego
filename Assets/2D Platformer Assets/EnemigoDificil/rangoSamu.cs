@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * Script para el rango del samurai y controlar que si algo entra en el mismo atacará 
+ * @author Ismael Paloma Narváez
+ */
 public class rangoSamu : MonoBehaviour
 {
     public Animator ani;

@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * Cofre que al colisionar nos desbloqueará el salto doble
+ * @author Ismael Paloma Narváez
+ */
 public class cofreSalto : MonoBehaviour
 {
     public Animator ani;

@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * Controlador principal de los efectos de sonido en todo el juego
+ * @author Ismael Paloma Narváez
+ */
 public class Audio : MonoBehaviour
 {
     public static Audio instance;

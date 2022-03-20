@@ -4,7 +4,10 @@ using UnityEngine;
 using System;
 using System.Data;
 using Mono.Data.Sqlite;
-
+/**
+ * Finalizamos el nivel con la condición de que hayamos acabado con los dos enemigos principales(mago y samurai)
+ * @author Ismael Paloma Narváez
+ */
 public class LevelExit : MonoBehaviour
 {
     public static LevelExit instance;
@@ -18,7 +21,7 @@ public class LevelExit : MonoBehaviour
     }
 
     private void Start()
-    {
+    {//miramos en base de datos si las condiciones para terminar el nivel se han cumplido o no
         string url1 = "URI=file:" + Application.dataPath + "/database/2d.db";
         IDbConnection dbConn1 = new SqliteConnection(url1);
         dbConn1.Open();
@@ -109,6 +112,7 @@ public class LevelExit : MonoBehaviour
 
     public void MagoDerrotado()
     {
+        //guardamos en base de datos que hemos derrotado al mago
         muerteMago = 1;
         
         string url = "URI=file:" + Application.dataPath + "/database/2d.db";
@@ -132,6 +136,7 @@ public class LevelExit : MonoBehaviour
     }
     public void SamuDerrotado()
     {
+        //guardamos en base de datos que hemos derrotado al samurai
         muerteSamu = 1;
 
         string url = "URI=file:" + Application.dataPath + "/database/2d.db";

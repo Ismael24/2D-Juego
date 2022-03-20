@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * Script que controlará al enemigo más debil de este juego, tiene un diseño básico en el que se queda parado x segundos y avanza otros desde una posición "a" a una posición "b"
+ * @author Ismael Paloma Narváez
+ */
 public class EnemySlime : MonoBehaviour
 {
     public static EnemySlime instance;

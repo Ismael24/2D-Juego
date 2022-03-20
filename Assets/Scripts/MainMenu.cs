@@ -5,11 +5,15 @@ using UnityEngine.SceneManagement;
 using System;
 using System.Data;
 using Mono.Data.Sqlite;
-
+/**
+ * Menu principal con sus respectivas funcionalidades con los diferentes botones
+ * @author Ismael Paloma Narváez
+ */
 public class MainMenu : MonoBehaviour
 {
     public string startScene;
-    // Start is called before the first frame update
+    
+    //empezamos de cero por lo que llamamos a las funciones de restablecimiento de valores de la base de datos
     public void StartGame()
     {
         ResetDoble();
@@ -17,15 +21,18 @@ public class MainMenu : MonoBehaviour
         ResetSamu();
         SceneManager.LoadScene(startScene);
     }
+    //continuamos la partida
     public void ContinueGame()
     {
         
         SceneManager.LoadScene(startScene);
     }
+    //salimos del juego
     public void QuitGame()
     {
         Application.Quit();
     }
+    //reseteamos en base de datos la aparición del mago
     private void ResetMago() 
     {
         int muerteMago = 0;
@@ -47,6 +54,7 @@ public class MainMenu : MonoBehaviour
         dbConn.Dispose();
         dbConn = null;
     }
+    //reseteamos en base de datos la aparición del samurai
     private void ResetSamu()
     {
         int muerteSamu = 0;
@@ -68,6 +76,7 @@ public class MainMenu : MonoBehaviour
         dbConn.Dispose();
         dbConn = null;
     }
+    //reseteamos en base de datos la adquisición del doble salto
     private void ResetDoble()
     {
         int posDoble = 0;

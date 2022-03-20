@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * Script algo más complejo sobre el comportamiento de otro enemigo (Mago)
+ * @author Ismael Paloma Narváez
+ */
 public class EnemyMago : MonoBehaviour
 {
     public static EnemyMago instance;
@@ -26,12 +29,13 @@ public class EnemyMago : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //actualizamos la orientación de nuestro enemigo en función del target en este caso nuestro jugador, este no se mueve.
         Vector3 direction = target.transform.position-transform.position;
         if (direction.x >= 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         else transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
 
         float distance = Mathf.Abs(target.transform.position.x - transform.position.x);
-
+        //distancia a la que empezaremos a disparar en dirección a nuestro tarjet, aplicamos un tiempo para que no dispare demasiado continuo
         if (distance < 100.0f && Time.time > LastShoot + 2.5)
         {
             Shoot();
@@ -39,7 +43,7 @@ public class EnemyMago : MonoBehaviour
             LastShoot = Time.time;
         }
     }
-
+    //función para disparar si no esta atacando a de forma cercana el enemigo al tarjet
     private void Shoot()
     {
         if (atacando == false)
@@ -55,22 +59,24 @@ public class EnemyMago : MonoBehaviour
         
     
     }
+    //control de animaciones
     public void Final_Ani()
     {
         ani.SetBool("attack", false);
         atacando = false;
         rango.GetComponent<BoxCollider2D>().enabled = true;
     }
+    //activamos el collider de ataque cercano
     public void ColliderWeaponTrue()
     {
         hit.GetComponent<BoxCollider2D>().enabled = true;
     }
-
+    //desactivamos el collider del ataque cercano
     public void ColliderWeaponFalse()
     {
         hit.GetComponent<BoxCollider2D>().enabled = false;
     }
-
+    //controla si el enemigo aparecerá o no
     public void noAparezco() 
     {
         this.gameObject.SetActive(false);

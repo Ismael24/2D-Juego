@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * Controlamos el rango del mago de forma cercana, si el jugador entra atacará y dejará de lanzar bolas de fuego
+ * @author Ismael Paloma Narváez
+ */
 public class RangoMago : MonoBehaviour
 {
     public Animator ani;

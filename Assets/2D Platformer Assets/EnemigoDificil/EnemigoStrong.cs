@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * Script algo más complejo sobre el comportamiento de otro enemigo (samurai)
+ * @author Ismael Paloma Narváez
+ */
 public class EnemigoStrong : MonoBehaviour
 {
     public static EnemigoStrong instance;
@@ -34,7 +37,9 @@ public class EnemigoStrong : MonoBehaviour
     {
         Comportamientos();
     }
-
+    //en cuanto a este comportamniento el enemigo avanzara desde un punto a otro de manera aleatoria, tanto la parada como el avance.
+    //si en su rango entra el target en este caso nuestro jugador empezará a avanzar de manera más rapida hacie el target, si volvemos a salir volverá a su rutina.
+    //si entra en otro rango predefinido esté parará para atacar al target
     public void Comportamientos() 
     {
         if (Mathf.Abs(transform.position.x - target.transform.position.x) > rango_vision && !atacando) 
@@ -132,22 +137,24 @@ public class EnemigoStrong : MonoBehaviour
 
 
     }
-
+    //control de animaciones
     public void Final_Ani() 
     {
         ani.SetBool("attack", false);
         atacando = false;
         rango.GetComponent<BoxCollider2D>().enabled = true;
     }
+    //activación del collider de ataque
     public void ColliderWeaponTrue()
     {
         hit.GetComponent<BoxCollider2D>().enabled = true;
     }
-
+    //desactivación del collider de ataque
     public void ColliderWeaponFalse()
     {
         hit.GetComponent<BoxCollider2D>().enabled = false;
     }
+    //funcion que decide si el personaje va a aparecer o no
     public void noAparezco()
     {
         this.gameObject.SetActive(false);
