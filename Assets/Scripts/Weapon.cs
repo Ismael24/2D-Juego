@@ -10,8 +10,8 @@ public class Weapon : MonoBehaviour
     public GameObject potion;
     public GameObject deathEffectSamu; 
     public GameObject deathEffectMago;
-    public bool samuFin = false;
-    public bool magoFin = false;
+    public int samuFin = 0;
+    public int magoFin = 0;
 
     private void Awake()
     {
@@ -27,6 +27,7 @@ public class Weapon : MonoBehaviour
             other.transform.parent.gameObject.SetActive(false);
             Instantiate(deathEffectSlime, other.transform.position, other.transform.rotation);
             Instantiate(potion, other.transform.position, other.transform.rotation);//No funciona, no hace el drop de la pocion
+            
 
 
 
@@ -41,6 +42,8 @@ public class Weapon : MonoBehaviour
                 Instantiate(deathEffectSamu, other.transform.position, other.transform.rotation);
                 LevelExit.instance.SamuDerrotado();
             }
+            
+            
             
                 
 
@@ -58,9 +61,11 @@ public class Weapon : MonoBehaviour
             Instantiate(potion, other.transform.position, other.transform.rotation);//No funciona, no hace el drop de la pocion
             LevelExit.instance.MagoDerrotado();
 
-
+            
 
         }
+
+
 
 
 

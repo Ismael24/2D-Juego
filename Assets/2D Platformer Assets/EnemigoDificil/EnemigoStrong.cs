@@ -148,4 +148,8 @@ public class EnemigoStrong : MonoBehaviour
     {
         hit.GetComponent<BoxCollider2D>().enabled = false;
     }
+    public void noAparezco()
+    {
+        this.gameObject.SetActive(false);
+    }
 }
