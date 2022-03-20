@@ -57,8 +57,10 @@ public class VidaJugador : MonoBehaviour
                 if (currentHealth <= 0)
                 {
                     ControladorJugador.instance.anim.SetTrigger("Death");
+                    ControladorJugador.instance.stopInput = true;
                     //llamamos a otro script para respawnear a nuestro jugador
                     LevelManager.instance.RespawnPlayer();
+                    
 
                 }
                 else

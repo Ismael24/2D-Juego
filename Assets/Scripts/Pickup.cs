@@ -18,7 +18,7 @@ public class Pickup : MonoBehaviour
             {
                 //llamamos a una funcion para aplicar el efecto de la pocion en este caso rellenar media barra
                 VidaJugador.instance.DarMana();
-
+                Audio.instance.PlaySSFX(11);
                 isCollected = true;
                 //finalmente, ya ha sido recolectado por lo que destruimos el objeto
                 Destroy(gameObject);

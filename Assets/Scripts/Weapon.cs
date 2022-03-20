@@ -8,13 +8,12 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public static Weapon instance;
-    private int contadorBoss = 1;
+    private int contadorBoss = 6;
     public GameObject deathEffectSlime;
     public GameObject potion;
     public GameObject deathEffectSamu; 
     public GameObject deathEffectMago;
-    public int samuFin = 0;
-    public int magoFin = 0;
+    
 
     private void Awake()
     {

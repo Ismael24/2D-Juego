@@ -37,7 +37,7 @@ public class LevelManager : MonoBehaviour
     {
         Audio.instance.PlaySSFX(7);
         ControladorJugador.instance.gameObject.SetActive(false);
-
+        
         ControladorJugador.instance.gameObject.SetActive(true);
         ControladorJugador.instance.transform.position = CheckpointController.instance.spawn;
 
@@ -54,6 +54,7 @@ public class LevelManager : MonoBehaviour
         ControladorJugador.instance.transform.position = CheckpointController.instance.spawn;
 
         VidaJugador.instance.currentHealth = VidaJugador.instance.maxHealth;
+        ControladorJugador.instance.stopInput = false;
         UIController.instance.UpdateHealthDisplay();
 
 
