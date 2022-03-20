@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+/**
+ * Script para la pantalla de pausa 
+ * @author Ismael Paloma Narváez
+ */
 public class ResumeMenu : MonoBehaviour
 {
     public static ResumeMenu instance;
@@ -19,12 +22,13 @@ public class ResumeMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //asignamos el pausa a la tecla escape
         if (Input.GetKeyDown("escape")) 
         {
             PauseUnpause();
         }
     }
-
+    //función que controla el pause
     public void PauseUnpause() 
     {
         if (isPaused)
@@ -41,7 +45,7 @@ public class ResumeMenu : MonoBehaviour
         }
 
     }
-
+    //posiblidad de volver al menu inicial
     public void MainMenu() 
     {
         SceneManager.LoadScene(mainMenu);

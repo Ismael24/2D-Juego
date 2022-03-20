@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/**
+ * Script que controla el interfaz de jugador en este caso los corazones y la barra de maná
+ * @author Ismael Paloma Narváez
+ */
 public class UIController : MonoBehaviour
 {
     public static UIController instance;
@@ -29,6 +32,7 @@ public class UIController : MonoBehaviour
     {
 
     }
+    //switch para cambiar los corazones en función del numero de vida
     public void UpdateHealthDisplay()
     {
         switch (VidaJugador.instance.currentHealth)
@@ -90,6 +94,7 @@ public class UIController : MonoBehaviour
 
         }
     }
+    //switch que cambia el relleno de la barra en función de numero de maná que tengamos
 
     public void UpdateManaDisplay()
     {

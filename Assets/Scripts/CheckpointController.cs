@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/**
+ * Script que controla los checkpoints quedándose con el último al que accedamos
+ * @author Ismael Paloma Narváez
+ */
 public class CheckpointController : MonoBehaviour
 {
     public static CheckpointController instance;
@@ -34,7 +37,6 @@ public class CheckpointController : MonoBehaviour
         
 
     }
-
     public void SetSpawn(Vector2 newSpawn) 
     
     {

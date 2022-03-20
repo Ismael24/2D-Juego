@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
-
+/**
+ * Script que controlará tanto la vida como el mana de nuestro jugador, cuando se aplican daños, cuando nos curamos o bien cuando recivimos o gastamos mana.
+ * @author Ismael Paloma Narváez
+ */
 public class VidaJugador : MonoBehaviour
 {
     public static VidaJugador instance;
@@ -28,7 +31,7 @@ public class VidaJugador : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   //aplicamos un tiempo en el que nuestro jugador sera invencible para darle algo de ventaja si esta sufriendo daños
         if (invincibleCounter > 0)
         {
             invincibleCounter -= Time.deltaTime;
@@ -39,7 +42,7 @@ public class VidaJugador : MonoBehaviour
             }
         }
     }
-
+    //funcion que resta vida a nuestro jugador siempre que la invencibilidad no esté activa.
     public void DealDamage() 
     {
         if (currentHealth != 0)
@@ -54,6 +57,7 @@ public class VidaJugador : MonoBehaviour
                 if (currentHealth <= 0)
                 {
                     ControladorJugador.instance.anim.SetTrigger("Death");
+                    //llamamos a otro script para respawnear a nuestro jugador
                     LevelManager.instance.RespawnPlayer();
 
                 }
@@ -64,7 +68,7 @@ public class VidaJugador : MonoBehaviour
 
                     ControladorJugador.instance.Knockback();
                 }
-
+                //actualización visual del UI
                 UIController.instance.UpdateHealthDisplay();
 
 
@@ -79,6 +83,7 @@ public class VidaJugador : MonoBehaviour
 
 
     }
+    //función que suma mana
     public void DarMana() { 
         currentMana++;
         if (currentMana > maxMana) 
@@ -87,6 +92,7 @@ public class VidaJugador : MonoBehaviour
         }
         UIController.instance.UpdateManaDisplay();
     }
+    //funcón que aplica la mecánica de autosanación que cura un corazón completo solo si te falta más de medio corazón
     public void DarVida()
     {
         if (currentHealth<=4 && currentMana>0)
@@ -102,7 +108,7 @@ public class VidaJugador : MonoBehaviour
             UIController.instance.UpdateManaDisplay();
         }
     }
-
+    //función que nos suma mana al jugador solo si el mana no esta al máximo
     public void DealMana()
     {
         
